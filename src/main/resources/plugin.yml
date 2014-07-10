@@ -1,0 +1,3 @@
+name: DomWilliams0-t3
+main: com.tenjava.entries.DomWilliams0.t3.TenJava
+version: '${project.version}'
