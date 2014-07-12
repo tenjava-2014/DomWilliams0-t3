@@ -29,7 +29,7 @@ public class DiseaseInitiator
 			epicentre = cause.getLocation();
 
 
-		final Location centre = epicentre.getWorld().getHighestBlockAt(Utils.getRandomRelativeLocation(epicentre, 50)).getLocation();
+		final Location centre = epicentre.getWorld().getHighestBlockAt(Utils.getRandomRelativeLocation(epicentre, 20)).getLocation();
 
 		new BukkitRunnable()
 		{
@@ -37,9 +37,13 @@ public class DiseaseInitiator
 			@Override
 			public void run()
 			{
-				centre.getWorld().strikeLightningEffect(centre);
+				centre.getWorld().createExplosion(centre, 0);
+
 				for (Effect effect : new Effect[]{Effect.GHAST_SHRIEK, Effect.POTION_BREAK, Effect.ENDER_SIGNAL})
+				{
+					centre.getWorld().strikeLightningEffect(centre);
 					centre.getWorld().playEffect(centre, effect, 0);
+				}
 
 				new SporeCloud(centre);
 

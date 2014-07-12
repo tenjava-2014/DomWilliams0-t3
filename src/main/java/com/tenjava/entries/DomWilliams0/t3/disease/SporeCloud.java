@@ -1,22 +1,21 @@
 package com.tenjava.entries.DomWilliams0.t3.disease;
 
 import com.tenjava.entries.DomWilliams0.t3.TenJava;
+import com.tenjava.entries.DomWilliams0.t3.util.Effects;
 import com.tenjava.entries.DomWilliams0.t3.util.Utils;
-import org.bukkit.Effect;
 import org.bukkit.Location;
 import org.bukkit.block.Block;
-import org.bukkit.block.BlockFace;
 import org.bukkit.util.BlockIterator;
 import org.bukkit.util.Vector;
 
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Disease carrier
+ */
 public class SporeCloud implements Disease
 {
-	private static final int MAX_SIZE = 12;
-
-	//	protected Set<Location> locations;
 	private Location centre;
 	private Vector direction;
 	private int lastDirectionChange;
@@ -33,24 +32,10 @@ public class SporeCloud implements Disease
 	@Override
 	public void tick()
 	{
+		Effects.sporeEffect(centre, 4);
 		move();
-		playEffect();
 	}
 
-	private void playEffect()
-	{
-		centre.getWorld().playEffect(centre, Effect.SMOKE, TenJava.RANDOM.nextInt(8));
-
-		int rad = TenJava.RANDOM.nextInt(4);
-		for (int i = 1; i <= rad; i++)
-		{
-			for (int j = 0; j < 3; j++)
-			{
-				Block b = centre.getBlock().getRelative(BlockFace.values()[TenJava.RANDOM.nextInt(BlockFace.values().length)], rad);
-				b.getWorld().playEffect(b.getLocation(), Effect.SMOKE, TenJava.RANDOM.nextInt(8));
-			}
-		}
-	}
 
 	private void move()
 	{

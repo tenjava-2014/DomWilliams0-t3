@@ -6,12 +6,15 @@ import org.bukkit.scheduler.BukkitRunnable;
 import java.util.HashSet;
 import java.util.Set;
 
+/**
+ * Manages all active sporeclouds
+ */
 public class DiseaseController
 {
 	public static DiseaseController INSTANCE;
 
-	private DiseaseTask task;
 	protected Set<SporeCloud> sporeClouds;
+	protected BukkitRunnable task;
 
 	public DiseaseController()
 	{
@@ -20,9 +23,17 @@ public class DiseaseController
 		INSTANCE = this;
 
 		this.sporeClouds = new HashSet<SporeCloud>();
-
 		start();
+
 	}
+
+	public void start()
+	{
+		stop();
+		task = new DiseaseTask();
+		task.runTaskTimer(TenJava.INSTANCE, 0L, 25L);
+	}
+
 
 	public void stop()
 	{
@@ -33,17 +44,11 @@ public class DiseaseController
 		}
 	}
 
-	public void start()
-	{
-		stop();
-		task = new DiseaseTask();
-		task.runTaskTimer(TenJava.INSTANCE, 0L, 15L);
-	}
-
 	public boolean isRunning()
 	{
 		return task != null;
 	}
+
 
 	class DiseaseTask extends BukkitRunnable
 	{

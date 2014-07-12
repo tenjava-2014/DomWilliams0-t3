@@ -1,9 +1,12 @@
 package com.tenjava.entries.DomWilliams0.t3.util;
 
 import com.tenjava.entries.DomWilliams0.t3.TenJava;
-import org.bukkit.block.Block;
+import org.bukkit.Bukkit;
+import org.bukkit.ChatColor;
+import org.bukkit.Location;
 import org.bukkit.block.BlockFace;
 import org.bukkit.command.CommandSender;
+import org.bukkit.entity.Player;
 import org.bukkit.util.Vector;
 
 public class Utils
@@ -55,7 +58,7 @@ public class Utils
 	 */
 	public static void msg(CommandSender sender, String message)
 	{
-		sender.sendMessage(PREFIX + message);
+		sender.sendMessage(PREFIX + ChatColor.translateAlternateColorCodes('&', message));
 	}
 
 	/**
@@ -63,7 +66,14 @@ public class Utils
 	 */
 	public static void error(CommandSender sender, String message)
 	{
-		sender.sendMessage(ERROR_PREFIX + message);
+		sender.sendMessage(ERROR_PREFIX + ChatColor.translateAlternateColorCodes('&', message));
+	}
+
+	public static void broadcast(String message)
+	{
+		for (Player player : Bukkit.getOnlinePlayers())
+			Utils.msg(player, message);
+
 	}
 
 	public static Vector randomVector()
@@ -71,15 +81,22 @@ public class Utils
 		return new Vector(randomVectorDirection(), TenJava.RANDOM.nextFloat() * (TenJava.RANDOM.nextFloat() < 0.2 ? 1 : -1), randomVectorDirection());
 	}
 
-	public static Block getAboveOrBelow(Block block, boolean above)
-	{
-		return block.getRelative(0, above ? 1 : -1, 0);
-	}
-
 	private static float randomVectorDirection()
 	{
 		return TenJava.RANDOM.nextFloat() * (TenJava.RANDOM.nextBoolean() ? 1 : -1);
 	}
 
+	public static Location getRandomRelativeLocation(Location loc, int radius)
+	{
+		Location relative = loc.clone();
 
+		relative.add((TenJava.RANDOM.nextBoolean() ? 1 : -1) * TenJava.RANDOM.nextInt(radius), 0, (TenJava.RANDOM.nextBoolean() ? 1 : -1) * TenJava.RANDOM.nextInt(radius));
+		return relative;
+	}
+
+
+	public static String simplifyLocation(Location location)
+	{
+		return location.getBlockX() + ", " + location.getBlockY() + ", " + location.getBlockZ();
+	}
 }
