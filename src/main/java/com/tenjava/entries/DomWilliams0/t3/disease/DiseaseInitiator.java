@@ -5,6 +5,7 @@ import com.tenjava.entries.DomWilliams0.t3.util.Utils;
 import org.bukkit.Bukkit;
 import org.bukkit.Effect;
 import org.bukkit.Location;
+import org.bukkit.Sound;
 import org.bukkit.entity.Player;
 import org.bukkit.scheduler.BukkitRunnable;
 
@@ -37,21 +38,27 @@ public class DiseaseInitiator
 			@Override
 			public void run()
 			{
-				centre.getWorld().createExplosion(centre, 0);
-
-				for (Effect effect : new Effect[]{Effect.GHAST_SHRIEK, Effect.POTION_BREAK, Effect.ENDER_SIGNAL})
-				{
-					centre.getWorld().strikeLightningEffect(centre);
-					centre.getWorld().playEffect(centre, effect, 0);
-				}
-
-				new MobileSporeCloud(centre);
-
-				Utils.broadcast("&o&7There has been an &2outbreak&7 at &8" + Utils.simplifyLocation(centre) + "!");
-
+				release(centre);
 			}
 		}.runTaskLater(TenJava.INSTANCE, TenJava.RANDOM.nextInt(50) + 10);
 
+
+	}
+
+	public static void release(Location location)
+	{
+		location.getWorld().createExplosion(location, 0);
+
+		for (Effect effect : new Effect[]{Effect.GHAST_SHRIEK, Effect.POTION_BREAK, Effect.ENDER_SIGNAL})
+		{
+			location.getWorld().strikeLightningEffect(location);
+			location.getWorld().playEffect(location, effect, 0);
+		}
+		location.getWorld().playSound(location, Sound.WITHER_DEATH, 3f, 1f);
+
+		new MobileSporeCloud(location);
+
+		Utils.broadcast("&o&7There has been an &2outbreak&7 at &8" + Utils.simplifyLocation(location) + "!");
 
 	}
 

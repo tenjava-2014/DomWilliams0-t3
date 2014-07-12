@@ -1,21 +1,19 @@
 package com.tenjava.entries.DomWilliams0.t3.util;
 
 import com.tenjava.entries.DomWilliams0.t3.TenJava;
-import org.bukkit.Effect;
-import org.bukkit.Location;
-import org.bukkit.Sound;
-import org.bukkit.World;
+import org.bukkit.*;
 import org.bukkit.entity.LivingEntity;
 
 public class Effects
 {
-	private static int[] sporeColours = new int[]{29, 48, 81};
+//	private static int[] sporeColours = new int[]{29, 48, 81};
+	private static Sound[] sounds = new Sound[]{Sound.AMBIENCE_CAVE, Sound.FIRE, Sound.FIZZ, Sound.PORTAL_TRAVEL, Sound.CAT_HISS, Sound.CAT_PURR, Sound.WITHER_IDLE};
 
-	public static void sporeEffect(Location location, int radius, boolean withStep)
+	public static void sporeEffect(Location location, int radius)
 	{
 		World world = location.getWorld();
 
-		for (int i = 0; i < 4; i++)
+		for (int i = 0; i < 12; i++)
 			world.playEffect(location, Effect.SMOKE, TenJava.RANDOM.nextInt(8));
 
 		int rad = TenJava.RANDOM.nextInt(radius);
@@ -26,15 +24,19 @@ public class Effects
 			{
 				Location l = Utils.getRandomRelativeLocation(location, radius);
 				world.playEffect(l, Effect.SMOKE, TenJava.RANDOM.nextInt(8));
-				if (withStep)
-					world.playEffect(l, Effect.STEP_SOUND, sporeColours[TenJava.RANDOM.nextInt(sporeColours.length)]);
 			}
 		}
+		world.playSound(location, sounds[TenJava.RANDOM.nextInt(sounds.length)], 0.4f, 1f);
+	}
+
+	public static void infectedEffect(LivingEntity entity)
+	{
+		entity.getWorld().playEffect(entity.getEyeLocation(), Effect.STEP_SOUND, Material.REDSTONE_BLOCK.getId());
 	}
 
 	public static void ouchSound(LivingEntity entity)
 	{
-		if (TenJava.RANDOM.nextFloat() < 0.6)
+		if (TenJava.RANDOM.nextFloat() < 0.8)
 			return;
 
 		Sound sound;
@@ -63,20 +65,8 @@ public class Effects
 				sound = Sound.HURT_FLESH;
 		}
 
-		entity.getWorld().playSound(entity.getLocation(), sound, 1f, 1f);
-
-
+		Utils.playSound(entity, sound);
 	}
 
 
-	public static void kill(LivingEntity entity)
-	{
-
-
-
-
-
-
-
-	}
 }

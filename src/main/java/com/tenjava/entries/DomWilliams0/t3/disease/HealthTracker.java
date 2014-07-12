@@ -41,6 +41,11 @@ public class HealthTracker
 	{
 		int newValue = getHealth(entity) - 1;
 		health.put(entity.getUniqueId(), newValue);
+		System.out.println("something was damaged to " + newValue);
+
+		if (newValue <= 0)
+			health.remove(entity.getUniqueId());
+
 		return newValue;
 	}
 

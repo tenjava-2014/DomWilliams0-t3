@@ -1,12 +1,13 @@
 package com.tenjava.entries.DomWilliams0.t3.util;
 
 import com.tenjava.entries.DomWilliams0.t3.TenJava;
-import org.bukkit.Bukkit;
-import org.bukkit.ChatColor;
-import org.bukkit.Location;
+import org.bukkit.*;
 import org.bukkit.block.BlockFace;
 import org.bukkit.command.CommandSender;
+import org.bukkit.entity.Entity;
+import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
+import org.bukkit.inventory.ItemStack;
 import org.bukkit.util.Vector;
 
 public class Utils
@@ -98,5 +99,21 @@ public class Utils
 	public static String simplifyLocation(Location location)
 	{
 		return location.getBlockX() + ", " + location.getBlockY() + ", " + location.getBlockZ();
+	}
+
+	public static void scatterItems(Material material, int amount, Location location)
+	{
+		for (int i = 0; i < amount; i++)
+			location.getWorld().dropItemNaturally(location, new ItemStack(material));
+	}
+
+	public static void playSound(Entity entity, Sound sound)
+	{
+		entity.getWorld().playSound(entity.getLocation(), sound, 1f, 1f);
+	}
+
+	public static void playEffect(LivingEntity entity, Effect effect, int data)
+	{
+		entity.getWorld().playEffect(entity.getEyeLocation(), effect, data);
 	}
 }

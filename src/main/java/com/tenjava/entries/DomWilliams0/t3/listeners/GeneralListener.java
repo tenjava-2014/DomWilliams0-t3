@@ -5,6 +5,7 @@ import org.bukkit.entity.LivingEntity;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.entity.EntityDamageEvent;
+import org.bukkit.event.player.PlayerPickupItemEvent;
 
 public class GeneralListener implements Listener
 {
@@ -29,6 +30,16 @@ public class GeneralListener implements Listener
 		}
 
 
+	}
+
+	@EventHandler
+	public void onPickup(PlayerPickupItemEvent event)
+	{
+		if (event.getItem().hasMetadata("ETI-PICKUP"))
+		{
+			event.setCancelled(true);
+			event.getItem().remove();
+		}
 	}
 
 

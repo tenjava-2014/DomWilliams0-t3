@@ -28,6 +28,11 @@ public class MainCommand implements BaseCommand
 			Utils.msg(sender, "Releasing the spores...");
 			new DiseaseInitiator(sender instanceof Player ? (Player) sender : null);
 		}
+		else if (args[0].equalsIgnoreCase("go") && sender instanceof Player)
+		{
+			Utils.msg(sender, "Releasing the spores in front of you!");
+			DiseaseInitiator.release(((Player) sender).getLocation());
+		}
 
 
 		return true;

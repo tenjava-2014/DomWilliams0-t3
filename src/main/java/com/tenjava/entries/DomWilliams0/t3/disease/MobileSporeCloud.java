@@ -5,8 +5,6 @@ import com.tenjava.entries.DomWilliams0.t3.util.Effects;
 import com.tenjava.entries.DomWilliams0.t3.util.Utils;
 import org.bukkit.Location;
 import org.bukkit.block.Block;
-import org.bukkit.entity.Entity;
-import org.bukkit.entity.LivingEntity;
 import org.bukkit.util.BlockIterator;
 import org.bukkit.util.Vector;
 
@@ -33,9 +31,9 @@ public class MobileSporeCloud extends Disease
 	@Override
 	public void tick()
 	{
-		Effects.sporeEffect(centre, 4, true);
+		Effects.sporeEffect(centre, 4);
 		move();
-		infect();
+		infectNearby(centre);
 	}
 
 
@@ -73,33 +71,6 @@ public class MobileSporeCloud extends Disease
 	}
 
 
-	private void infect()
-	{
-		// get nearby
-		Entity[] chunk = centre.getChunk().getEntities();
-		if (chunk.length == 0)
-			return;
-
-		for (Entity entity : chunk)
-		{
-
-			if (!DiseaseController.INSTANCE.canBeInfected(entity) || DiseaseController.INSTANCE.isInfected(entity))
-				continue;
-
-			if (entity instanceof LivingEntity)
-			{
-				LivingEntity le = (LivingEntity) entity;
-				if (TenJava.RANDOM.nextFloat() < 0.2) // infection!
-				{
-					new InfectionSporeCloud(le);
-					return; // only infect one mob at a time
-				}
-
-			}
-
-		}
-
-	}
 
 
 }

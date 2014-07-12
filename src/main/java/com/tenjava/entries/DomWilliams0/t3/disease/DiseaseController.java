@@ -20,7 +20,7 @@ public class DiseaseController
 	protected BukkitRunnable task;
 	private long nextOutbreak;
 
-	protected Set<Disease> diseases;
+	protected Set<Disease> diseases, diseaseBuffer;
 	private Set<UUID> infected;
 
 	public DiseaseController()
@@ -30,6 +30,8 @@ public class DiseaseController
 		INSTANCE = this;
 
 		this.diseases = new HashSet<Disease>();
+		this.diseaseBuffer = new HashSet<Disease>();
+
 		this.infected = new HashSet<UUID>();
 		nextOutbreak();
 		start();
@@ -69,6 +71,15 @@ public class DiseaseController
 		@Override
 		public void run()
 		{
+			// flush buffer
+			if (!diseaseBuffer.isEmpty())
+			{
+				for (Disease disease : diseaseBuffer)
+					diseases.add(disease);
+				diseaseBuffer.clear();
+			}
+
+
 			for (Iterator<Disease> iterator = diseases.iterator(); iterator.hasNext(); )
 			{
 				Disease disease = iterator.next();
@@ -95,7 +106,6 @@ public class DiseaseController
 			}
 		}
 	}
-
 
 
 	public void unregisterInfection(LivingEntity entity)
@@ -125,7 +135,7 @@ public class DiseaseController
 				case CHICKEN:
 				case WOLF:
 				case PIG:
-				case PLAYER:
+					// case PLAYER:
 					return true;
 			}
 		}
