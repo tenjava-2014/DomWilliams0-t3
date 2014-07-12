@@ -1,4 +1,4 @@
-DomWilliams0's ten.java submission : __ExtraTerrestrialInfection__
+ExtraTerrestrialInfection
 ==============================
 
 [![:¬D](http://images.amcnetworks.com/ifc.com/wp-content/uploads/2013/08/tumblr_mr5dh9GmPd1sqhc57o1_500.jpg)](https://tenjava.com/)
