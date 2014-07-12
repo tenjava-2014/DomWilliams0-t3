@@ -2,8 +2,15 @@ package com.tenjava.entries.DomWilliams0.t3.commands;
 
 import org.bukkit.command.CommandSender;
 
-public interface BaseCommand
+public abstract class BaseCommand
 {
-	boolean execute(CommandSender sender, String[] args);
+	protected boolean consoleAllowed;
+
+	protected BaseCommand(boolean consoleAllowed)
+	{
+		this.consoleAllowed = consoleAllowed;
+	}
+
+	abstract boolean execute(CommandSender sender, String[] args);
 
 }
