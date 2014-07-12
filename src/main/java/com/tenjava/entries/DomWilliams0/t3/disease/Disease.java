@@ -1,6 +1,7 @@
 package com.tenjava.entries.DomWilliams0.t3.disease;
 
 import com.tenjava.entries.DomWilliams0.t3.TenJava;
+import com.tenjava.entries.DomWilliams0.t3.disease.sporeclouds.InfectionSporeCloud;
 import org.bukkit.Location;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.LivingEntity;
@@ -20,7 +21,7 @@ public abstract class Disease
 		DiseaseController.INSTANCE.diseaseBuffer.add(this);
 	}
 
-	abstract void tick();
+	public abstract void tick();
 
 	protected void infectNearby(Location location)
 	{
@@ -50,9 +51,12 @@ public abstract class Disease
 
 	}
 
-	static enum TickRate
+	/**
+	 * Refers to the rate at which a spore cloud can move
+	 */
+	public static enum TickRate
 	{
-		SUPER(0), FAST(2), NORMAL(4);
+		SUPER(0), FAST(2), NORMAL(3);
 
 		int rate;
 

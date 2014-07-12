@@ -1,6 +1,7 @@
 package com.tenjava.entries.DomWilliams0.t3.disease;
 
 import com.tenjava.entries.DomWilliams0.t3.TenJava;
+import com.tenjava.entries.DomWilliams0.t3.disease.sporeclouds.InfectionSporeCloud;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.scheduler.BukkitRunnable;
@@ -11,7 +12,7 @@ import java.util.Set;
 import java.util.UUID;
 
 /**
- * Manages all sporeclouds, as well as initiators
+ * Manages most disease related processes
  */
 public class DiseaseController
 {
@@ -21,7 +22,7 @@ public class DiseaseController
 	private long nextOutbreak;
 
 	protected Set<Disease> diseases, diseaseBuffer;
-	private Set<UUID> infected;
+	private Set<UUID> infected, immune;
 
 	public DiseaseController()
 	{
@@ -33,6 +34,7 @@ public class DiseaseController
 		this.diseaseBuffer = new HashSet<Disease>();
 
 		this.infected = new HashSet<UUID>();
+		this.immune = new HashSet<UUID>();
 		nextOutbreak();
 		start();
 
@@ -66,6 +68,15 @@ public class DiseaseController
 		nextOutbreak = System.currentTimeMillis() + (TenJava.RANDOM.nextInt(offset) + offset); // between 5 and 10 minutes
 	}
 
+	public int end()
+	{
+		int amount = diseases.size() + diseaseBuffer.size();
+		diseases.clear();
+		diseaseBuffer.clear();
+		infected.clear();
+		return amount;
+	}
+
 	class DiseaseTask extends BukkitRunnable
 	{
 		@Override
@@ -83,6 +94,9 @@ public class DiseaseController
 			for (Iterator<Disease> iterator = diseases.iterator(); iterator.hasNext(); )
 			{
 				Disease disease = iterator.next();
+
+				if ((disease instanceof InfectionSporeCloud && immune.contains(((InfectionSporeCloud) disease).getVictim().getUniqueId())))
+					disease.shouldRemove = true;
 
 				if (disease.shouldRemove)
 				{
@@ -107,7 +121,6 @@ public class DiseaseController
 		}
 	}
 
-
 	public void unregisterInfection(LivingEntity entity)
 	{
 		infected.remove(entity.getUniqueId());
@@ -127,6 +140,9 @@ public class DiseaseController
 	{
 		if (entity instanceof LivingEntity)
 		{
+			if (immune.contains(entity.getUniqueId()))
+				return false;
+
 			switch (entity.getType())
 			{
 				case MUSHROOM_COW:
@@ -135,7 +151,7 @@ public class DiseaseController
 				case CHICKEN:
 				case WOLF:
 				case PIG:
-					// case PLAYER:
+				case PLAYER:
 					return true;
 			}
 		}
@@ -144,5 +160,23 @@ public class DiseaseController
 
 	}
 
+	/**
+	 * @return The entities current state of immunity
+	 */
+	public boolean toggleImmunity(LivingEntity entity)
+	{
+		UUID uuid = entity.getUniqueId();
+		boolean nowImmune = false;
+		if (immune.contains(uuid))
+			immune.remove(uuid);
+		else
+		{
+			immune.add(uuid);
+			nowImmune = true;
+			unregisterInfection(entity);
+
+		}
+		return nowImmune;
+	}
 
 }

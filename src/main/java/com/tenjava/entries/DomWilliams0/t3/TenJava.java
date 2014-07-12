@@ -1,7 +1,6 @@
 package com.tenjava.entries.DomWilliams0.t3;
 
 import com.tenjava.entries.DomWilliams0.t3.commands.CommandManager;
-import com.tenjava.entries.DomWilliams0.t3.commands.MainCommand;
 import com.tenjava.entries.DomWilliams0.t3.disease.DiseaseController;
 import com.tenjava.entries.DomWilliams0.t3.disease.HealthTracker;
 import com.tenjava.entries.DomWilliams0.t3.listeners.GeneralListener;
@@ -27,8 +26,7 @@ public class TenJava extends JavaPlugin
 		new DiseaseController();
 		new HealthTracker();
 
-		CommandManager manager = new CommandManager();
-		manager.registerCommand("eti", new MainCommand());
+		new CommandManager().registerCommands();
 
 		getServer().getPluginManager().registerEvents(new GeneralListener(), this);
 	}

@@ -10,6 +10,9 @@ import org.bukkit.event.player.PlayerPickupItemEvent;
 public class GeneralListener implements Listener
 {
 
+	/**
+	 * Makes sure an infected entity will always die from its symptoms
+	 */
 	@EventHandler
 	public void onEntityDeath(EntityDamageEvent event)
 	{
@@ -20,18 +23,13 @@ public class GeneralListener implements Listener
 
 
 		if (DiseaseController.INSTANCE.isInfected(entity))
-		{
 			if (entity.getHealth() - event.getDamage() <= 0) // killing blow
-			{
 				DiseaseController.INSTANCE.unregisterInfection(entity);
-			}
-
-
-		}
-
-
 	}
 
+	/**
+	 * Prevents free items
+	 */
 	@EventHandler
 	public void onPickup(PlayerPickupItemEvent event)
 	{
@@ -41,6 +39,5 @@ public class GeneralListener implements Listener
 			event.getItem().remove();
 		}
 	}
-
 
 }

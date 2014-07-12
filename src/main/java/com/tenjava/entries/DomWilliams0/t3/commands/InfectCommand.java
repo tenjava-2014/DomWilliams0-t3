@@ -1,7 +1,7 @@
 package com.tenjava.entries.DomWilliams0.t3.commands;
 
 import com.tenjava.entries.DomWilliams0.t3.TenJava;
-import com.tenjava.entries.DomWilliams0.t3.disease.InfectionSporeCloud;
+import com.tenjava.entries.DomWilliams0.t3.disease.sporeclouds.InfectionSporeCloud;
 import com.tenjava.entries.DomWilliams0.t3.util.Utils;
 import org.bukkit.Bukkit;
 import org.bukkit.command.CommandSender;
@@ -36,7 +36,10 @@ public class InfectCommand extends BaseCommand
 		if (target == null)
 			Utils.error(sender, "That player is not online!");
 		else
+		{
 			new InfectionSporeCloud(target);
+
+		}
 
 		return true;
 	}

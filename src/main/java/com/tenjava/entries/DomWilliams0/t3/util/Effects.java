@@ -6,9 +6,12 @@ import org.bukkit.entity.LivingEntity;
 
 public class Effects
 {
-//	private static int[] sporeColours = new int[]{29, 48, 81};
+	//	private static int[] sporeColours = new int[]{29, 48, 81};
 	private static Sound[] sounds = new Sound[]{Sound.AMBIENCE_CAVE, Sound.FIRE, Sound.FIZZ, Sound.PORTAL_TRAVEL, Sound.CAT_HISS, Sound.CAT_PURR, Sound.WITHER_IDLE};
 
+	/**
+	 * Plays the floating spore cloud effect
+	 */
 	public static void sporeEffect(Location location, int radius)
 	{
 		World world = location.getWorld();
@@ -29,11 +32,18 @@ public class Effects
 		world.playSound(location, sounds[TenJava.RANDOM.nextInt(sounds.length)], 0.4f, 1f);
 	}
 
+	/**
+	 * Plays a blood effect
+	 */
 	public static void infectedEffect(LivingEntity entity)
 	{
-		entity.getWorld().playEffect(entity.getEyeLocation(), Effect.STEP_SOUND, Material.REDSTONE_BLOCK.getId());
+		if (TenJava.RANDOM.nextFloat() < 0.8)
+			entity.getWorld().playEffect(entity.getEyeLocation(), Effect.STEP_SOUND, Material.REDSTONE_BLOCK.getId());
 	}
 
+	/**
+	 * Plays a hurt sound depending on the EntityType
+	 */
 	public static void ouchSound(LivingEntity entity)
 	{
 		if (TenJava.RANDOM.nextFloat() < 0.8)

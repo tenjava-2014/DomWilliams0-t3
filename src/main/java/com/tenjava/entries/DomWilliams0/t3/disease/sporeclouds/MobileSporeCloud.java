@@ -1,6 +1,8 @@
-package com.tenjava.entries.DomWilliams0.t3.disease;
+package com.tenjava.entries.DomWilliams0.t3.disease.sporeclouds;
 
 import com.tenjava.entries.DomWilliams0.t3.TenJava;
+import com.tenjava.entries.DomWilliams0.t3.disease.Disease;
+import com.tenjava.entries.DomWilliams0.t3.disease.WorldCorruption;
 import com.tenjava.entries.DomWilliams0.t3.util.Effects;
 import com.tenjava.entries.DomWilliams0.t3.util.Utils;
 import org.bukkit.Location;
@@ -12,19 +14,20 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Disease carrier
+ * A cloud of toxic spores that corrupt the world and infect nearby entities
  */
 public class MobileSporeCloud extends Disease
 {
 	private Location centre;
 	private Vector direction;
+	private WorldCorruption worldInfection;
 	private int lastDirectionChange;
-
 
 	public MobileSporeCloud(Location location)
 	{
 		this.centre = location;
 		this.direction = Utils.randomVector();
+		this.worldInfection = new WorldCorruption();
 		this.lastDirectionChange = 0;
 	}
 
@@ -34,6 +37,7 @@ public class MobileSporeCloud extends Disease
 		Effects.sporeEffect(centre, 4);
 		move();
 		infectNearby(centre);
+		worldInfection.tick(centre);
 	}
 
 
@@ -69,8 +73,6 @@ public class MobileSporeCloud extends Disease
 
 		centre = blocks.get(blocks.size() - 1).getLocation();
 	}
-
-
 
 
 }

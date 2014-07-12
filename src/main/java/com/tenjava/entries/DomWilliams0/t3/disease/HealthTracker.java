@@ -1,5 +1,6 @@
 package com.tenjava.entries.DomWilliams0.t3.disease;
 
+import com.tenjava.entries.DomWilliams0.t3.TenJava;
 import org.bukkit.entity.LivingEntity;
 
 import java.util.HashMap;
@@ -20,28 +21,23 @@ public class HealthTracker
 
 
 	/**
-	 * Defaults to 100
+	 * Defaults to between 50 and 80
 	 */
 	public int getHealth(LivingEntity entity)
 	{
 		Integer i = health.get(entity.getUniqueId());
-		return i == null ? 100 : i;
-	}
-
-	public void setHealth(LivingEntity entity, int newHealth)
-	{
-		health.put(entity.getUniqueId(), newHealth);
+		return i == null ? TenJava.RANDOM.nextInt(50) + 30 : i;
 	}
 
 	/**
 	 * Decrements an entity's health by 1
+	 *
 	 * @return The new health
 	 */
 	public int damage(LivingEntity entity)
 	{
 		int newValue = getHealth(entity) - 1;
 		health.put(entity.getUniqueId(), newValue);
-		System.out.println("something was damaged to " + newValue);
 
 		if (newValue <= 0)
 			health.remove(entity.getUniqueId());

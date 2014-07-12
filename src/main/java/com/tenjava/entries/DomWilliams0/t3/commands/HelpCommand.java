@@ -16,29 +16,29 @@ public class HelpCommand extends BaseCommand
 	public boolean execute(CommandSender sender, String[] args)
 	{
 
-//		if (args.length == 0)
-//		{
-//			DiseaseController dc = DiseaseController.INSTANCE;
-//			if (dc.isRunning())
-//				dc.stop();
-//			else
-//				dc.start();
-//
-//			Utils.msg(sender, "Sporecloud movement is now " + (dc.isRunning() ? "enabled" : "disabled"));
-//		}
-//
-//		else if (args[0].equalsIgnoreCase("begin"))
-//		{
-//			Utils.msg(sender, "Releasing the spores...");
-//			new DiseaseInitiator(sender instanceof Player ? (Player) sender : null);
-//		}
-//		else if (args[0].equalsIgnoreCase("go") && sender instanceof Player)
-//		{
-//			Utils.msg(sender, "Releasing the spores in front of you!");
-//			DiseaseInitiator.release(((Player) sender).getLocation());
-//		}
+		//		if (args.length == 0)
+		//		{
+		//			DiseaseController dc = DiseaseController.INSTANCE;
+		//			if (dc.isRunning())
+		//				dc.stop();
+		//			else
+		//				dc.start();
+		//
+		//			Utils.msg(sender, "Sporecloud movement is now " + (dc.isRunning() ? "enabled" : "disabled"));
+		//		}
+		//
+		//		else if (args[0].equalsIgnoreCase("begin"))
+		//		{
+		//			Utils.msg(sender, "Releasing the spores...");
+		//			new DiseaseInitiator(sender instanceof Player ? (Player) sender : null);
+		//		}
+		//		else if (args[0].equalsIgnoreCase("go") && sender instanceof Player)
+		//		{
+		//			Utils.msg(sender, "Releasing the spores in front of you!");
+		//			DiseaseInitiator.release(((Player) sender).getLocation());
+		//		}
 
-		Utils.msg(sender, "&8--- &9ExtraTerrestrialInfection Help &8---");
+		Utils.msg(sender, "&8--- &bExtraTerrestrialInfection Help &8---");
 
 		Utils.msg(sender, "&o&8These <params> are optional");
 		Utils.msg(sender, "&7/eti &8- &3This help menu");
@@ -48,7 +48,7 @@ public class HelpCommand extends BaseCommand
 		Utils.msg(sender, "&7/eti infect <player> &8- &3Infect a player");
 		Utils.msg(sender, "&7/eti immune <player> &8- &3Vaccinate yourself/a player");
 
-		Utils.msg(sender, "&8--- &9End of Help&8---");
+		Utils.msg(sender, "&8--- &bEnd of Help &8---");
 
 
 		return true;

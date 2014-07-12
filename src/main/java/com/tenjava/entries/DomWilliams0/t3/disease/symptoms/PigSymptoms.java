@@ -21,7 +21,7 @@ public class PigSymptoms extends BaseSymptoms
 	{
 		if (TenJava.RANDOM.nextFloat() < 0.4)
 		{
-			Utils.scatterItems(Material.GRILLED_PORK, 2, entity.getLocation());
+			Utils.scatterItems(Material.PORK, 2, entity.getLocation());
 			Utils.playSound(entity, Sound.CHICKEN_EGG_POP);
 		}
 

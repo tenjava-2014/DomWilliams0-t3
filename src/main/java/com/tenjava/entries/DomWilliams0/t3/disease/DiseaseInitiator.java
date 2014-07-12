@@ -1,6 +1,7 @@
 package com.tenjava.entries.DomWilliams0.t3.disease;
 
 import com.tenjava.entries.DomWilliams0.t3.TenJava;
+import com.tenjava.entries.DomWilliams0.t3.disease.sporeclouds.MobileSporeCloud;
 import com.tenjava.entries.DomWilliams0.t3.util.Utils;
 import org.bukkit.Bukkit;
 import org.bukkit.Effect;
@@ -9,6 +10,9 @@ import org.bukkit.Sound;
 import org.bukkit.entity.Player;
 import org.bukkit.scheduler.BukkitRunnable;
 
+/**
+ * Causes lightning to bring down a spore cloud from space
+ */
 public class DiseaseInitiator
 {
 
@@ -58,7 +62,7 @@ public class DiseaseInitiator
 
 		new MobileSporeCloud(location);
 
-		Utils.broadcast("&o&7There has been an &2outbreak&7 at &8" + Utils.simplifyLocation(location) + "!");
+		Utils.broadcast("&o&7There has been an &2outbreak&7 at &8" + Utils.simplifyLocation(location) + "&7!");
 
 	}
 
