@@ -19,7 +19,7 @@ public class CowSymptoms extends BaseSymptoms
 	{
 		for (int i = 0; i < 8; i++)
 			Utils.playEffect(entity, Effect.SMOKE, i);
-//		Utils.playEffect(entity, Effect.EXTINGUISH, 0);
+		//		Utils.playEffect(entity, Effect.EXTINGUISH, 0);
 	}
 
 	@Override

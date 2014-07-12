@@ -11,9 +11,12 @@ public abstract class BaseSymptoms
 		this.entity = entity;
 	}
 
-	private BaseSymptoms() {}
+	private BaseSymptoms()
+	{
+	}
 
 	public abstract void tick();
+
 	public abstract void die();
 
 }

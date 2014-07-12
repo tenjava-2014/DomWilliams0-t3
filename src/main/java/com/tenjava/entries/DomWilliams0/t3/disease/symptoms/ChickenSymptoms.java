@@ -23,7 +23,7 @@ public class ChickenSymptoms extends BaseSymptoms
 	@Override
 	public void tick()
 	{
-		if (TenJava.RANDOM.nextFloat() < 0.5)
+		if (TenJava.RANDOM.nextFloat() < 0.4)
 		{
 			Utils.playSound(entity, Sound.FUSE);
 			entity.setVelocity(entity.getVelocity().setY(0.4));
