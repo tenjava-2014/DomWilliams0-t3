@@ -1,3 +1,10 @@
-name: DomWilliams0-t3
+name: ExtraTerrestrialInfection
 main: com.tenjava.entries.DomWilliams0.t3.TenJava
 version: '${project.version}'
+author: Chinwe
+prefix: ETI
+commands:
+  eti:
+    usage: /eti
+    description: Shows the help menu
+
