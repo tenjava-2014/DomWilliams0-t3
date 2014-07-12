@@ -45,12 +45,12 @@ public class DiseaseInitiator
 					centre.getWorld().playEffect(centre, effect, 0);
 				}
 
-				new SporeCloud(centre);
+				new MobileSporeCloud(centre);
 
 				Utils.broadcast("&o&7There has been an &2outbreak&7 at &8" + Utils.simplifyLocation(centre) + "!");
 
 			}
-		}.runTaskLater(TenJava.INSTANCE, TenJava.RANDOM.nextInt(50) + 50);
+		}.runTaskLater(TenJava.INSTANCE, TenJava.RANDOM.nextInt(50) + 10);
 
 
 	}

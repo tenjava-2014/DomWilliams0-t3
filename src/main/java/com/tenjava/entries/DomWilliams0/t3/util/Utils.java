@@ -78,7 +78,7 @@ public class Utils
 
 	public static Vector randomVector()
 	{
-		return new Vector(randomVectorDirection(), TenJava.RANDOM.nextFloat() * (TenJava.RANDOM.nextFloat() < 0.2 ? 1 : -1), randomVectorDirection());
+		return new Vector(randomVectorDirection(), TenJava.RANDOM.nextFloat() * (TenJava.RANDOM.nextFloat() < 0.4 ? 1 : -1), randomVectorDirection());
 	}
 
 	private static float randomVectorDirection()

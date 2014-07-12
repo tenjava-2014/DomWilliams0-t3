@@ -5,6 +5,8 @@ import com.tenjava.entries.DomWilliams0.t3.util.Effects;
 import com.tenjava.entries.DomWilliams0.t3.util.Utils;
 import org.bukkit.Location;
 import org.bukkit.block.Block;
+import org.bukkit.entity.Entity;
+import org.bukkit.entity.LivingEntity;
 import org.bukkit.util.BlockIterator;
 import org.bukkit.util.Vector;
 
@@ -14,26 +16,26 @@ import java.util.List;
 /**
  * Disease carrier
  */
-public class SporeCloud implements Disease
+public class MobileSporeCloud extends Disease
 {
 	private Location centre;
 	private Vector direction;
 	private int lastDirectionChange;
 
-	public SporeCloud(Location location)
+
+	public MobileSporeCloud(Location location)
 	{
 		this.centre = location;
 		this.direction = Utils.randomVector();
 		this.lastDirectionChange = 0;
-
-		DiseaseController.INSTANCE.sporeClouds.add(this);
 	}
 
 	@Override
 	public void tick()
 	{
-		Effects.sporeEffect(centre, 4);
+		Effects.sporeEffect(centre, 4, true);
 		move();
+		infect();
 	}
 
 
@@ -44,7 +46,6 @@ public class SporeCloud implements Disease
 		{
 			direction = Utils.randomVector();
 			lastDirectionChange = TenJava.RANDOM.nextInt(5) + 3;
-			return;
 		}
 
 		// get path
@@ -70,4 +71,35 @@ public class SporeCloud implements Disease
 
 		centre = blocks.get(blocks.size() - 1).getLocation();
 	}
+
+
+	private void infect()
+	{
+		// get nearby
+		Entity[] chunk = centre.getChunk().getEntities();
+		if (chunk.length == 0)
+			return;
+
+		for (Entity entity : chunk)
+		{
+
+			if (!DiseaseController.INSTANCE.canBeInfected(entity) || DiseaseController.INSTANCE.isInfected(entity))
+				continue;
+
+			if (entity instanceof LivingEntity)
+			{
+				LivingEntity le = (LivingEntity) entity;
+				if (TenJava.RANDOM.nextFloat() < 0.2) // infection!
+				{
+					new InfectionSporeCloud(le);
+					return; // only infect one mob at a time
+				}
+
+			}
+
+		}
+
+	}
+
+
 }
