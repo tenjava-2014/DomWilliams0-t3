@@ -52,11 +52,6 @@
                 <version>
                     2.3.1
                 </version>
-                <configuration>
-                    <outputDirectory>
-                        C:\Users\Dom\Minecraft\Bukkit\Servers\tenjava second\plugins
-                    </outputDirectory>
-                </configuration>
             </plugin>
 		</plugins>
 		<resources>
